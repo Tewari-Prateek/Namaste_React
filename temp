@@ -1,0 +1,36 @@
+import * as React from 'react';
+import { SearchBox, Stack } from '@fluentui/react';
+
+const TypeAheadSearchBox = () => {
+    const [searchValue, setSearchValue] = React.useState('');
+    const [options, setOptions] = React.useState([
+        'Apple', 'Banana', 'Orange', 'Pineapple', 'Grapes'
+    ]);
+    const [filteredOptions, setFilteredOptions] = React.useState([...options]);
+
+    const onSearch = (newValue) => {
+        setSearchValue(newValue);
+        setFilteredOptions(options.filter(option =>
+            option.toLowerCase().includes(newValue.toLowerCase())
+        ));
+    };
+
+    return (
+        <Stack horizontalAlign="start" tokens={{ childrenGap: 10 }}>
+            <SearchBox
+                placeholder="Type to search..."
+                value={searchValue}
+                onChange={(e, newValue) => onSearch(newValue)}
+                onClear={() => onSearch('')}
+                styles={{ root: { selectors: { '.ms-SearchBox-icon': { display: 'none' } } } }}
+            />
+            <Stack tokens={{ childrenGap: 10 }}>
+                {filteredOptions.map((option, index) => (
+                    <span key={index}>{option}</span>
+                ))}
+            </Stack>
+        </Stack>
+    );
+};
+
+export default TypeAheadSearchBox;

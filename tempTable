@@ -1,47 +1,44 @@
-import * as React from 'react';
-import { DetailsList, DetailsListLayoutMode, Selection, IColumn, DefaultButton, IconButton } from '@fluentui/react';
+import { Table, TableHeader, TableHeaderCell, TableBody, TableRow, TableCell } from '@fluentui/react-components';
+
+const data = [
+    { id: 1, name: 'Item 1' },
+    { id: 2, name: 'Item 2' },
+    { id: 3, name: 'Item 3' },
+    // Add more data rows as needed
+];
 
 const MyTable = () => {
-    // Sample data
-    const items = [
-        { key: '1', name: 'Item 1', value: 'Value 1' },
-        { key: '2', name: 'Item 2', value: 'Value 2' },
-        { key: '3', name: 'Item 3', value: 'Value 3' },
-        // Add more items as needed
-    ];
-
-    // Custom rendering function for buttons
-    const renderButtons = (item: any) => {
-        return (
-            <div>
-                <DefaultButton text="Button 1" onClick={() => handleButtonClick(item.key, 'button1')} />
-                <IconButton iconProps={{ iconName: 'Delete' }} onClick={() => handleButtonClick(item.key, 'delete')} />
-            </div>
-        );
-    };
-
-    // Define columns
-    const columns: IColumn[] = [
-        { key: 'column1', name: 'Name', fieldName: 'name', minWidth: 100 },
-        { key: 'column2', name: 'Value', fieldName: 'value', minWidth: 100 },
-        { key: 'column3', name: '', fieldName: '', minWidth: 100, onRender: renderButtons },
-    ];
-
-    // Handle button click
-    const handleButtonClick = (itemId: string, action: string) => {
-        // Perform action based on button clicked
-        console.log(`Button ${action} clicked for item ${itemId}`);
-    };
-
     return (
-        <div>
-            <DetailsList
-                items={items}
-                columns={columns}
-                //      
-                layoutMode={DetailsListLayoutMode.fixedColumns}
-            />
-        </div>
+        <Table aria-label="My table">
+            <TableHeader>
+                <TableRow>
+                    <TableHeaderCell colSpan={3} style={{ backgroundColor: 'blue', color: 'white' }}>
+                        My Blue Header
+                    </TableHeaderCell>
+                </TableRow>
+                <TableRow>
+                    <TableHeaderCell>ID</TableHeaderCell>
+                    <TableHeaderCell>Name</TableHeaderCell>
+                    <TableHeaderCell>Actions</TableHeaderCell>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {data.map((item) => (
+                    <TableRow key={item.id}>
+                        <TableCell>{item.id}</TableCell>
+                        <TableCell>{item.name}</TableCell>
+                        <TableCell>
+                            <button style={{ backgroundColor: 'yellow' }} onClick={() => console.log(`Lost clicked for item ${item.id}`)}>
+                                Lost
+                            </button>
+                            <button style={{ backgroundColor: 'blue', color: 'white' }} onClick={() => console.log(`Renew clicked for item ${item.id}`)}>
+                                Renew
+                            </button>
+                        </TableCell>
+                    </TableRow>
+                ))}
+            </TableBody>
+        </Table>
     );
 };
 

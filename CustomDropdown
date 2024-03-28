@@ -1,0 +1,23 @@
+import * as React from 'react';
+import { Dropdown, IDropdownOption } from '@fluentui/react-components';
+
+interface MyDropdownProps {
+  items: { key: string; name: string }[];
+  onChange: (selectedKey: string) => void;
+}
+
+const MyDropdown: React.FC<MyDropdownProps> = ({ items, onChange }) => {
+  const dropdownOptions: IDropdownOption[] = items.map((item) => ({
+    key: item.key,
+    text: item.name, // Displayed in the dropdown
+  }));
+
+  return (
+    <Dropdown
+      options={dropdownOptions}
+      onChange={(_, option) => onChange(option.key as string)}
+    />
+  );
+};
+
+export default MyDropdown;

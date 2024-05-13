@@ -1,13 +1,22 @@
 import * as React from 'react';
 import { Table } from '@fluentui/react-components';
 
-const data = [
+// Define your data type (you can replace this with your actual data structure)
+type MyData = {
+  id: number;
+  name: string;
+  age: number;
+};
+
+// Sample data
+const data: MyData[] = [
   { id: 1, name: 'Alice', age: 30 },
   { id: 2, name: 'Bob', age: 25 },
   { id: 3, name: 'Charlie', age: 28 },
   // Add more data rows as needed
 ];
 
+// Define columns
 const columns = [
   { key: 'id', name: 'ID', fieldName: 'id', minWidth: 50, maxWidth: 100 },
   { key: 'name', name: 'Name', fieldName: 'name', minWidth: 100, maxWidth: 200 },
@@ -15,7 +24,7 @@ const columns = [
   // Add more columns as needed
 ];
 
-const ResponsiveTable = () => {
+const ResponsiveTable: React.FC = () => {
   return (
     <Table items={data} columns={columns} />
   );

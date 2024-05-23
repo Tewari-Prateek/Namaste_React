@@ -1,33 +1,174 @@
-import * as React from 'react';
-import { Table } from '@fluentui/react-components';
+import { Menu, MenuTrigger, MenuItem, MenuList, MenuPopover, Button, makeStyles, shorthands } from '@fluentui/react-components';
+import { Home20Regular, Mail20Regular, Code20Regular, Shield20Regular, Globe20Regular, Notepad20Regular } from '@fluentui/react-icons';
 
-// Define your data type (you can replace this with your actual data structure)
-type MyData = {
-  id: number;
-  name: string;
-  age: number;
+const useStyles = makeStyles({
+    nav: {
+        display: 'flex',
+        ...shorthands.gap('20px'),
+        ...shorthands.padding('10px 20px'),
+        backgroundColor: '#fff',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    },
+    menuPopover: {
+        ...shorthands.padding('20px'),
+        ...shorthands.borderRadius('8px'),
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+        backgroundColor: '#fff',
+    },
+    menuItem: {
+        display: 'flex',
+        alignItems: 'center',
+        ...shorthands.padding('10px 0',
+        )
+    },
+    menuIcon: {
+        marginRight: '10px',
+    },
+    menuFooter: {
+        marginTop: '10px',
+        fontWeight: 'bold',
+    },
+    button: {
+        ...shorthands.border('none'),
+        backgroundColor: 'transparent',
+        ...shorthands.padding('10px'),
+        fontSize: '16px',
+        cursor: 'pointer',
+        position: 'relative',
+        '&:hover::after': {
+            content: '""',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: '2px',
+            backgroundColor: 'black',
+        },
+    },
+    heroSection: {
+        ...shorthands.padding('100px 20px'),
+        textAlign: 'center',
+        backgroundColor: '#f9f9f9',
+    },
+    heroTitle: {
+        fontSize: '48px',
+        fontWeight: 'bold',
+        marginBottom: '20px',
+    },
+    heroSubtitle: {
+        fontSize: '24px',
+        color: '#666',
+        marginBottom: '40px',
+    },
+    heroButton: {
+        fontSize: '20px',
+        ...shorthands.padding('10px 20px'),
+    },
+    section: {
+        ...shorthands.padding('60px 20px'),
+        textAlign: 'center',
+    },
+    sectionTitle: {
+        fontSize: '36px',
+        fontWeight: 'bold',
+        marginBottom: '20px',
+    },
+    sectionContent: {
+        fontSize: '18px',
+        color: '#666',
+        marginBottom: '40px',
+    },
+});
+
+const MozillaHomepage = () => {
+    const classes = useStyles();
+
+    return (
+        <>
+            <nav className={classes.nav}>
+                <Menu>
+                    <MenuTrigger>
+                        <Button className={classes.button}>Firefox Browsers</Button>
+                    </MenuTrigger>
+                    <MenuPopover className={classes.menuPopover}>
+                        <MenuList>
+                            <MenuItem className={classes.menuItem}>
+                                <Home20Regular className={classes.menuIcon} /> Firefox for Desktop
+                            </MenuItem>
+                            <MenuItem className={classes.menuItem}>
+                                <Mail20Regular className={classes.menuIcon} /> Firefox for Android
+                            </MenuItem>
+                            <MenuItem className={classes.menuItem}>
+                                <Mail20Regular className={classes.menuIcon} /> Firefox for iOS
+                            </MenuItem>
+                            <MenuItem className={classes.menuItem}>
+                                <Shield20Regular className={classes.menuIcon} /> Firefox Focus
+                            </MenuItem>
+                            <MenuItem className={classes.menuItem}>
+                                <Code20Regular className={classes.menuIcon} /> Firefox Blog
+                            </MenuItem>
+                            <MenuItem className={classes.menuItem}>
+                                <Notepad20Regular className={classes.menuIcon} /> Release Notes
+                            </MenuItem>
+                        </MenuList>
+                        <div className={classes.menuFooter}>
+                            View all Firefox Browsers
+                        </div>
+                    </MenuPopover>
+                </Menu>
+                <Menu>
+                    <MenuTrigger>
+                        <Button className={classes.button}>Products</Button>
+                    </MenuTrigger>
+                    <MenuPopover className={classes.menuPopover}>
+                        <MenuList>
+                            <MenuItem className={classes.menuItem}>
+                                <Globe20Regular className={classes.menuIcon} /> Mozilla VPN
+                            </MenuItem>
+                        </MenuList>
+                    </MenuPopover>
+                </Menu>
+                <Menu>
+                    <MenuTrigger>
+                        <Button className={classes.button}>Who We Are</Button>
+                    </MenuTrigger>
+                    <MenuPopover className={classes.menuPopover}>
+                        <MenuList>
+                            <MenuItem className={classes.menuItem}>
+                                <Home20Regular className={classes.menuIcon} /> Mozilla Manifesto
+                            </MenuItem>
+                        </MenuList>
+                    </MenuPopover>
+                </Menu>
+                <Menu>
+                    <MenuTrigger>
+                        <Button className={classes.button}>Innovation</Button>
+                    </MenuTrigger>
+                    <MenuPopover className={classes.menuPopover}>
+                        <MenuList>
+                            <MenuItem className={classes.menuItem}>
+                                <Code20Regular className={classes.menuIcon} /> Mozilla Innovation Projects
+                            </MenuItem>
+                        </MenuList>
+                    </MenuPopover>
+                </Menu>
+            </nav>
+            <div className={classes.heroSection}>
+                <h1 className={classes.heroTitle}>Internet for people, not profit</h1>
+                <p className={classes.heroSubtitle}>
+                    Mozilla is a non-profit organization that promotes an open and accessible internet.
+                </p>
+                <Button className={classes.heroButton}>Learn More</Button>
+            </div>
+            <div className={classes.section}>
+                <h2 className={classes.sectionTitle}>Our Mission</h2>
+                <p className={classes.sectionContent}>
+                    We believe the internet should be open, accessible, and safe for everyone. Our products and initiatives aim to promote a healthier internet ecosystem.
+                </p>
+            </div>
+        </>
+    );
 };
 
-// Sample data
-const data: MyData[] = [
-  { id: 1, name: 'Alice', age: 30 },
-  { id: 2, name: 'Bob', age: 25 },
-  { id: 3, name: 'Charlie', age: 28 },
-  // Add more data rows as needed
-];
+export default MozillaHomepage;
 
-// Define columns
-const columns = [
-  { key: 'id', name: 'ID', fieldName: 'id', minWidth: 50, maxWidth: 100 },
-  { key: 'name', name: 'Name', fieldName: 'name', minWidth: 100, maxWidth: 200 },
-  { key: 'age', name: 'Age', fieldName: 'age', minWidth: 50, maxWidth: 100 },
-  // Add more columns as needed
-];
-
-const ResponsiveTable: React.FC = () => {
-  return (
-    <Table items={data} columns={columns} />
-  );
-};
-
-export default ResponsiveTable;
